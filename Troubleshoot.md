@@ -1,0 +1,1 @@
+If for some reason '$mvn spring-boot:run' is failing for unknown reason then just select the project in "java" perspective mode in eclipse and then right click to do maven -> update project. 

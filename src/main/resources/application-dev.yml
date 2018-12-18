@@ -1,0 +1,38 @@
+camel:
+  springboot:
+    # The Camel context name
+    name: CamelRestSql
+  component:
+    servlet:
+      mapping:
+        enabled: true
+        context-path: /camel-rest-sql/*
+
+# Binding health checks to a different port
+management:
+  port: 8081
+  security:
+   enabled: false
+
+# disable all management enpoints except health
+endpoints:
+  enabled: true
+  health:
+    enabled: true
+
+spring:
+  jpa:
+    properties:
+      javax:
+        persistence:
+          query:
+            timeout: 10
+  # Spring JDBC configuration
+  datasource:
+    # Let Spring Boot auto-configure an embedded HSQL database
+    url:
+
+# The application configuration properties
+quickstart:
+  generateOrderPeriod: 2s
+  processOrderPeriod: 5s

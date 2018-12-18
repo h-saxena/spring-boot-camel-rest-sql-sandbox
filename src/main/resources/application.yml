@@ -1,0 +1,69 @@
+camel:
+  springboot:
+    # The Camel context name
+    name: CamelRestSql
+  component:
+    servlet:
+      mapping:
+        enabled: true
+        context-path: /camel-rest-sql/*
+
+# Binding health checks to a different port
+# management:
+# 	port: 8081	
+# 	endpoints:
+#   		enabled: true
+#   		health:
+ #    		enabled: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+mysql:
+  service:
+    # The name of the service hosting the MySQL database server,
+    # can be customized using the 'MYSQL_SERVICE_NAME' env variable to use a different service
+    name:     mysql
+    # The database to use, can be customized using the 'MYSQL_SERVICE_DATABASE' env variable
+    database: sampledb
+
+spring:
+  jpa:
+    properties:
+      javax:
+        persistence:
+          query:
+            timeout: 10
+  # Spring JDBC configuration
+  datasource:
+    url:      jdbc:mysql://${${mysql.service.name}.service.host}:${${mysql.service.name}.service.port}/${mysql.service.database}
+    username: ${mysql.service.username}
+    password: ${mysql.service.password}
+    platfrom: mysql
+
+# The application configuration properties
+quickstart:
+  generateOrderPeriod: 10s
+  processOrderPeriod: 30s
+
+crmp:
+  datasource:
+    username: xxxxxx
+    password: xxxxx
+    url: jdbc:oracle:thin:@xxxxxx:1521/xxxxxxxx
+    driver-class-name: oracle.jdbc.OracleDriver
+    jmxEnabled: true
+  jpa:
+    database-platform: org.hibernate.dialect.Oracle10gDialect
+  
+siebeldb:
+  datasource:
+    # Siebel new (CDL) QA
+    username: xxxxxx
+    password: xxxx
+    url: jdbc:oracle:thin:@xxxxxx:1521/xxxxxxx
+    driver-class-name: oracle.jdbc.OracleDriver
+    jmxEnabled: true      
